@@ -9,5 +9,8 @@
  */
 class dmMediaUploadifyForm extends PluginDmMediaForm
 {
-  
+  public function configure()
+  {
+    $this->widgetSchema['file'] = new sfWidgetFormDmUploadify(array('add_sessionid' => true));
+  }
 }
