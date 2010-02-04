@@ -1,7 +1,6 @@
 _set_up_uploadify_widget = function($uploadified)
 {
   $uploadified_form = $uploadified.parents('form');
-  
   var meta_data = $uploadified.metadata({type: 'html5'});
   
 
@@ -32,7 +31,7 @@ _set_up_uploadify_widget = function($uploadified)
     'script'         :  $uploadified_form.attr('action'),
     'cancelImg'      : '/dmMediaUploadifyerPlugin/images/cancel.png',
     'queueID'        : 'fileQueue',
-//    'simUploadLimit' : 3,
+    'simUploadLimit' : 3,
     'fileDataName'   : $uploadified.attr('name'),
     'auto'           : false,
     'multi'          : true,
@@ -45,10 +44,8 @@ _set_up_uploadify_widget = function($uploadified)
     }
   });
   
-  console.log($uploadified.attr('name'));
-  
+
   $uploadified_form.bind('submit', function(e) {
-    //console.log('Live submit');
     e.preventDefault();
     
     varrr = jQuery.extend({
@@ -57,7 +54,6 @@ _set_up_uploadify_widget = function($uploadified)
       }, 
       __get_form_fields_as_object($uploadified_form)
     );
-    //console.log(varrr);
 
     $uploadified.uploadifySettings('scriptData', jQuery.extend({
         'uploadify_session_name' : meta_data.session_name, 
@@ -71,7 +67,7 @@ _set_up_uploadify_widget = function($uploadified)
     return false;
   });
 
-}
+};
 
 __get_form_fields_as_object = function($form) {
   fields = $form.serializeArray();
@@ -83,25 +79,19 @@ __get_form_fields_as_object = function($form) {
   });
   
   return result;
-}
+};
 
-__uploadify_widget_init = function()
-{
+
+__uploadify_widget_init = function() {
   $uploadified = jQuery('input.uploadify_file_field');  
   
   $uploadified.each(function(){
     _set_up_uploadify_widget($uploadified);
   });
-  
-}
+};
 
 
 jQuery(document).ready(function() {
-  
-//  console.log('Loaded upladify stuff');
-  
   __uploadify_widget_init()
-  //watch_events(jQuery('input.uploadify_file_field').parents('form'))
-  
 });   
 
