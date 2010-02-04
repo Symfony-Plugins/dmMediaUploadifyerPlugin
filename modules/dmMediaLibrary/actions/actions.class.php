@@ -30,7 +30,7 @@ class dmMediaLibraryActions extends BasedmMediaLibraryActions
     {
       $media = $form->save();                                        
       
-      return $this->renderAsync('success');
+      return $this->renderText('success');
     }
 
     $action = 'dmMediaLibrary/newMultipleFile?folder_id='.$folder->id;
