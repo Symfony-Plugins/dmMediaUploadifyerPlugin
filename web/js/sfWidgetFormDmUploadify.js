@@ -1,4 +1,4 @@
-_set_up_uploadify_widget = function($uploadified)
+__set_up_uploadify_widget = function($uploadified)
 {
   $uploadified_form = $uploadified.parents('form');
   var meta_data = $uploadified.metadata({type: 'html5'});
@@ -15,7 +15,7 @@ _set_up_uploadify_widget = function($uploadified)
     ).append(
       jQuery('<div/>', {
         id  :  'fileQueue',
-        text: 'Empty',
+        text: '',
         css: {
           'max-height': '350px',
           'overflow': 'auto',
@@ -27,20 +27,25 @@ _set_up_uploadify_widget = function($uploadified)
 
   $uploadified.uploadify({
     'uploader'       : dm_configuration.relative_url_root+'/dmMediaUploadifyerPlugin/swf/uploadify.swf',
-    'script'         :  $uploadified_form.attr('action'),
+    'script'         : $uploadified_form.attr('action'),
     'cancelImg'      : dm_configuration.relative_url_root+'/dmMediaUploadifyerPlugin/images/cancel.png',
     'queueID'        : 'fileQueue',
     'simUploadLimit' : 3,
     'fileDataName'   : $uploadified.attr('name'),
     'auto'           : false,
     'multi'          : true,
-    'onComplete'     : function(event, queueID, fileObj, response, data) {
+    'onAllComplete'  : function(event, queueID, fileObj, response, data) {
       $uploadified.closest('div.ui-dialog-content').dialog('close');
       $('#dm_admin_content').block();
       window.location.reload();
     },
+    'onProgress'     : function(event, queueID, fileObj, data) {
+      $uploadified_form.find(':submit,input:image').attr('value', 'Uploading files...').text('Uploading files...');
+      return true;
+    },
     'onError'        : function(event, queueID, fileObj, errorObj) {
-      //console.log(errorObj.info);
+      $uploadified_form.find(':submit,input:image').attr('value', 'Error uploading!').text('Error uploading!');
+      return true;
     }
   });
   
@@ -48,13 +53,6 @@ _set_up_uploadify_widget = function($uploadified)
   $uploadified_form.bind('submit', function(e) {
     e.preventDefault();
     
-    varrr = jQuery.extend({
-        'uploadify_session_name' : meta_data.session_name, 
-        'uploadify_session_id' : meta_data.session_id
-      }, 
-      __get_form_fields_as_object($uploadified_form)
-    );
-
     $uploadified.uploadifySettings('scriptData', jQuery.extend({
         'uploadify_session_name' : meta_data.session_name, 
         'uploadify_session_id' : meta_data.session_id
@@ -68,6 +66,7 @@ _set_up_uploadify_widget = function($uploadified)
   });
 
 };
+
 
 __get_form_fields_as_object = function($form) {
   fields = $form.serializeArray();
@@ -86,7 +85,7 @@ __uploadify_widget_init = function() {
   $uploadified = jQuery('input.uploadify_file_field');  
   
   $uploadified.each(function(){
-    _set_up_uploadify_widget($uploadified);
+    __set_up_uploadify_widget(jQuery(this));
   });
 };
 
