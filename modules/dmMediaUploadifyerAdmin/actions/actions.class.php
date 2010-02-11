@@ -1,7 +1,5 @@
 <?php
 
-require_once(dmOs::join(sfConfig::get('dm_admin_dir').'/modules/dmMediaLibrary/lib/BasedmMediaLibraryActions.class.php'));
-
 class dmMediaUploadifyerAdminActions extends dmAdminBaseActions
 {
   
@@ -33,7 +31,7 @@ class dmMediaUploadifyerAdminActions extends dmAdminBaseActions
       return $this->renderText('success');
     }
 
-    $action = 'dmMediaLibrary/newMultipleFile?folder_id='.$folder->id;
+    $action = '@dm_media_uploadifyer_multiple_files?folder_id='.$folder->id;
     
     $uploadify_widget = new sfWidgetFormDmUploadify();
     
