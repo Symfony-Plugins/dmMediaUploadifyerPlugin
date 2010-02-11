@@ -35,8 +35,9 @@ _set_up_uploadify_widget = function($uploadified)
     'auto'           : false,
     'multi'          : true,
     'onComplete'     : function(event, queueID, fileObj, response, data) {
-      //console.log(response);
-      //$uploadified.parent().after(response);
+      $uploadified.closest('div.ui-dialog-content').dialog('close');
+      $('#dm_admin_content').block();
+      window.location.reload();
     },
     'onError'        : function(event, queueID, fileObj, errorObj) {
       //console.log(errorObj.info);
