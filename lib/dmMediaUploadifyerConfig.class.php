@@ -13,7 +13,7 @@ class dmMediaUploadifyerConfig
         ->set('.new_multiple_file.uploadify_dialog_me.s16.s16_file_add')
     )->end();
     
-    dmContext::getInstance()->getResponse()->addJavascript('/dmMediaUploadifyerPlugin/js/dmAdminMediaUploadifyCtrl.js');
+    dmContext::getInstance()->getResponse()->addJavascript('dmMediaUploadifyerPlugin.adminCtrl');
   }
 
 }

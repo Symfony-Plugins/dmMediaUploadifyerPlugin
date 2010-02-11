@@ -25,11 +25,10 @@ _set_up_uploadify_widget = function($uploadified)
       })
   ));
 
-
   $uploadified.uploadify({
-    'uploader'       : '/dmMediaUploadifyerPlugin/swf/uploadify.swf',
+    'uploader'       : dm_configuration.relative_url_root+'/dmMediaUploadifyerPlugin/swf/uploadify.swf',
     'script'         :  $uploadified_form.attr('action'),
-    'cancelImg'      : '/dmMediaUploadifyerPlugin/images/cancel.png',
+    'cancelImg'      : dm_configuration.relative_url_root+'/dmMediaUploadifyerPlugin/images/cancel.png',
     'queueID'        : 'fileQueue',
     'simUploadLimit' : 3,
     'fileDataName'   : $uploadified.attr('name'),

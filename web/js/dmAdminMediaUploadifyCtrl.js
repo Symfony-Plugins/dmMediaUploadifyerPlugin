@@ -17,5 +17,4 @@ $library.find("div.control a.uploadify_dialog_me").bind('click', function()
   return false;
 });
 
-  
 })(jQuery);

@@ -37,14 +37,11 @@ class dmMediaLibraryActions extends BasedmMediaLibraryActions
     
     $uploadify_widget = new sfWidgetFormDmUploadify();
     
-    return $this->renderText(
-      $form->render('.dm_form.list.little action="'.$action.'"') .
-      $this->getHelper()->tag('div.dm_encoded_assets.none', json_encode(array(
-        'css' => $uploadify_widget->getStylesheets(),
-        'js'  => $uploadify_widget->getJavascripts(),
-      ))) . '<script type="text/javascript">__uploadify_widget_init()</script>'
-      
-    );
+    return $this->renderAsync(array(
+      'html'  => $form->render('.dm_form.list.little action="'.$action.'"'),
+      'css'   => $uploadify_widget->getStylesheets(),
+      'js'    => $uploadify_widget->getJavascripts()
+    ));
   }
   
   

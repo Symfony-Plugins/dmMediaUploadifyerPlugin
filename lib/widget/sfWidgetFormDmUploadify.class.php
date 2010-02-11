@@ -32,7 +32,7 @@ class sfWidgetFormDmUploadify extends sfWidgetFormDmInputFile
   protected function configure($options = array(), $attributes = array())
   {
     $this->addOption('upload_route', null); // will default to the form upload action through jQuery traversing
-    $this->addOption('uploadify_css', '/dmMediaUploadifyerPlugin/css/uploadify.css');
+    $this->addOption('uploadify_css', 'dmMediaUploadifyerPlugin.uploadify');
     
     $this->addOption('add_sessionid', false);
   }
@@ -86,10 +86,9 @@ class sfWidgetFormDmUploadify extends sfWidgetFormDmInputFile
   public function getJavascripts()
   {
     return array(
-      '/dmMediaUploadifyerPlugin/js/swfobject.js',
-      '/dmMediaUploadifyerPlugin/js/jquery.uploadify.v2.1.0.min.js',
-      '/dmMediaUploadifyerPlugin/js/sfWidgetFormDmUploadify.js',
-      $this->getOption('add_sessionid') ? '/dm/core/lib/metadata/jquery.metadata.min.js' : null
+      'dmMediaUploadifyerPlugin.swfobject',
+      'dmMediaUploadifyerPlugin.uploadify',
+      'dmMediaUploadifyerPlugin.sfWidget'
     );
   }  
 }
